@@ -15,9 +15,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
                 if(tabid == tab.id && changeInfo.url !== undefined
                         && changeInfo.status === "loading" && changeInfo.url.indexOf('api.vk.com/blank.html') > -1){
 
-                    var vkAccessToken = getUrlParameterValue(changeInfo.url, 'access_token')
-
-                    //chrome.storage.local.set({'vkAccessToken': vkAccessToken}, function() {});
+                    var vkAccessToken = getUrlParameterValue(changeInfo.url, 'access_token');
 
                     localStorage["vkAccessToken"] = vkAccessToken;
 
