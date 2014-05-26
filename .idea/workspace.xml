@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3837a9a-32e2-4f6d-a356-61b9248082b0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content.js" afterPath="$PROJECT_DIR$/content.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest.json" afterPath="$PROJECT_DIR$/manifest.json" />
     </list>
     <ignored path="VKstater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,10 +66,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="content.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="content.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/content.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="30" selection-start="4283" selection-end="4283" vertical-scroll-proportion="0.66560507" vertical-offset="1187" max-vertical-offset="3825">
+            <state line="107" column="30" selection-start="4283" selection-end="4283" vertical-scroll-proportion="-28.814816" vertical-offset="827" max-vertical-offset="3825">
               <folding />
             </state>
           </provider>
@@ -84,10 +84,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manifest.json" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="manifest.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manifest.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="18" selection-start="584" selection-end="584" vertical-scroll-proportion="-10.8" vertical-offset="0" max-vertical-offset="405">
+            <state line="18" column="18" selection-start="584" selection-end="584" vertical-scroll-proportion="0.42857143" vertical-offset="0" max-vertical-offset="630">
               <folding />
             </state>
           </provider>
@@ -126,8 +126,8 @@
       <list>
         <option value="$PROJECT_DIR$/background.js" />
         <option value="$PROJECT_DIR$/awesomechart.js" />
-        <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/content.js" />
+        <option value="$PROJECT_DIR$/manifest.json" />
       </list>
     </option>
   </component>
@@ -455,16 +455,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manifest.json">
+    <entry file="file://$PROJECT_DIR$/content.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="18" selection-start="584" selection-end="584" vertical-scroll-proportion="-10.8" vertical-offset="0" max-vertical-offset="405">
+        <state line="107" column="30" selection-start="4283" selection-end="4283" vertical-scroll-proportion="-28.814816" vertical-offset="827" max-vertical-offset="3825">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/content.js">
+    <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="30" selection-start="4283" selection-end="4283" vertical-scroll-proportion="0.66560507" vertical-offset="1187" max-vertical-offset="3825">
+        <state line="18" column="18" selection-start="584" selection-end="584" vertical-scroll-proportion="0.42857143" vertical-offset="0" max-vertical-offset="630">
           <folding />
         </state>
       </provider>
