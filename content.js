@@ -98,11 +98,16 @@ $(window).ready(function(){
             }else{
                 $('#wk_likes_content').html(
                     '<div style="height:1100px; margin-top:40px; margin-left:40px">' +
+                        '<p><b>Как пользоваться:</b></p>' +
                         '<p>1. Нажмите на иконку плагина чтобы залогиниться</p>' +
                         '<img style="margin-left:40px" src="' + chrome.extension.getURL("login.png") + '"></img>' +
                         '<p>2. Потом нажмите на закладку чтобы обновить страницу</p>' +
                         '<img style="margin-left:50px" src="' + chrome.extension.getURL("tab.png") + '"></img>' +
                         '<p>3. Смотрите статистику</p>' +
+                        '<br>' +
+                        '<p><b>Расширение показывает:</b></p>' +
+                            '<p>- из каких городов лайкнули данный пост</p>' +
+                            '<p>- какие группы самые популярные среди тех, кто лайкнул данный пост</p>' +
                     '</div>');
             }
         });
