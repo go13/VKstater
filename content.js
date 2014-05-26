@@ -17,81 +17,94 @@ $(window).ready(function(){
 
             vkAccessToken = response.vkAccessToken;
 
-            getUsersCities(matches[2], matches[3], matches[1], function(data){
-                var loadingImg = chrome.extension.getURL("loading.jpeg");
+            if(vkAccessToken){
 
-                $('#wk_likes_content').html(
-                    '<canvas id="canvasChartCity" width="610" height="300">' +
-                        'Your web-browser does not support the HTML 5 canvas element.' +
-                    '</canvas>' +
-                    '<img id="loadingGroupsImg" style="margin-left:100px; margin-bottom:50px" src="' + loadingImg + '"></img>' +
-                    '<canvas id="canvasChartGroups" style="display:none" width="610" height="800">' +
-                        'Your web-browser does not support the HTML 5 canvas element.' +
-                    '</canvas>'
-                    );
+                getUsersCities(matches[2], matches[3], matches[1], function(data){
+                    var loadingImg = chrome.extension.getURL("loading.jpeg");
 
-                var set = {};
-                var withCities = 0;
-                var ids = [];
+                    $('#wk_likes_content').html(
+                        '<canvas id="canvasChartCity" width="610" height="300">' +
+                            'Your web-browser does not support the HTML 5 canvas element.' +
+                        '</canvas>' +
+                        '<img id="loadingGroupsImg" style="margin-left:100px; margin-bottom:50px" src="' + loadingImg + '"></img>' +
+                        '<canvas id="canvasChartGroups" style="display:none" width="610" height="800">' +
+                            'Your web-browser does not support the HTML 5 canvas element.' +
+                        '</canvas>'
+                        );
 
-                data.response.forEach(function(el){
-                    if(typeof el.city != 'undefined'){
-                        var title = el.city.title;
+                    var set = {};
+                    var withCities = 0;
+                    var ids = [];
 
-                        if(set[title]){
-                            set[title].num++;
-                            withCities++;
-                        }else{
-                            set[title]={title: title, num: 1};
-                            withCities++;
+                    data.response.forEach(function(el){
+                        if(typeof el.city != 'undefined'){
+                            var title = el.city.title;
+
+                            if(set[title]){
+                                set[title].num++;
+                                withCities++;
+                            }else{
+                                set[title]={title: title, num: 1};
+                                withCities++;
+                            }
                         }
-                    }
-                    ids.push(el.id);
+                        ids.push(el.id);
 
-                });
-
-                var arr = [];
-
-                for(var prop in set){
-                    arr.push(set[prop]);
-                }
-
-                arr.sort(function(a, b){
-                    return a.num - b.num;
-                });
-
-                var barNum = 10;
-
-                arr.splice(-arr.length, arr.length - barNum);
-
-                var data = [];
-                var labels = [];
-
-                arr.forEach(function(el){
-                    data.push(Math.round(100 * el.num/withCities));
-                    labels.push(el.title);
-                });
-
-                drawMyChartCity(data, labels);
-
-                getUsersGroups(ids, function(data, likedNum){
-                    var dataGrops = [];
-                    var labelsGroups = [];
-
-                    data.forEach(function(el){
-                        //dataGrops.push(Math.round(100000 * el.num/likedNum)/1000);
-                        dataGrops.push(el.num);
-                        if(el.name){
-                            labelsGroups.push(el.name);
-                        }else{
-                            labelsGroups.push(el.first_name + ' ' + el.last_name);
-                        }
                     });
 
-                    drawMyChartGroups(dataGrops, labelsGroups);
+                    var arr = [];
+
+                    for(var prop in set){
+                        arr.push(set[prop]);
+                    }
+
+                    arr.sort(function(a, b){
+                        return a.num - b.num;
+                    });
+
+                    var barNum = 10;
+
+                    arr.splice(-arr.length, arr.length - barNum);
+
+                    var data = [];
+                    var labels = [];
+
+                    arr.forEach(function(el){
+                        data.push(Math.round(100 * el.num/withCities));
+                        labels.push(el.title);
+                    });
+
+                    drawMyChartCity(data, labels);
+
+                    getUsersGroups(ids, function(data, likedNum){
+                        var dataGrops = [];
+                        var labelsGroups = [];
+
+                        data.forEach(function(el){
+                            //dataGrops.push(Math.round(100000 * el.num/likedNum)/1000);
+                            dataGrops.push(el.num);
+                            if(el.name){
+                                labelsGroups.push(el.name);
+                            }else{
+                                labelsGroups.push(el.first_name + ' ' + el.last_name);
+                            }
+                        });
+
+                        drawMyChartGroups(dataGrops, labelsGroups);
+                    });
+
                 });
 
-            });
+            }else{
+                $('#wk_likes_content').html(
+                    '<div style="height:1100px; margin-top:40px; margin-left:40px">' +
+                        '<p>1. Нажмите на иконку плагина чтобы залогиниться</p>' +
+                        '<img style="margin-left:40px" src="' + chrome.extension.getURL("login.png") + '"></img>' +
+                        '<p>2. Потом нажмите на закладку чтобы обновить страницу</p>' +
+                        '<img style="margin-left:50px" src="' + chrome.extension.getURL("tab.png") + '"></img>' +
+                        '<p>3. Смотрите статистику</p>' +
+                    '</div>');
+            }
         });
       }
     }, false);

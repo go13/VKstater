@@ -17,5 +17,5 @@
    "name": "Vkstater",
    "permissions": [ "activeTab", "tabs", "storage" ],
    "version": "1.1",
-   "web_accessible_resources": [ "*.js", "loading.jpeg" ]
+   "web_accessible_resources": [ "*.js", "loading.jpeg", "login.png", "tab.png" ]
 }
