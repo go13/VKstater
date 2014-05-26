@@ -18,11 +18,14 @@ $(window).ready(function(){
             vkAccessToken = response.vkAccessToken;
 
             getUsersCities(matches[2], matches[3], matches[1], function(data){
+                var loadingImg = chrome.extension.getURL("loading.jpeg");
 
-                $('#wk_likes_content').html('<canvas id="canvasChartCity" width="610" height="300">' +
+                $('#wk_likes_content').html(
+                    '<canvas id="canvasChartCity" width="610" height="300">' +
                         'Your web-browser does not support the HTML 5 canvas element.' +
                     '</canvas>' +
-                    '<canvas id="canvasChartGroups" width="610" height="800">' +
+                    '<img id="loadingGroupsImg" style="margin-left:100px; margin-bottom:50px" src="' + loadingImg + '"></img>' +
+                    '<canvas id="canvasChartGroups" style="display:none" width="610" height="800">' +
                         'Your web-browser does not support the HTML 5 canvas element.' +
                     '</canvas>'
                     );
@@ -221,5 +224,8 @@ function drawMyChartGroups(data, labels){
             mychart.chartType = "horizontal bars"
             mychart.proportionalSizes = false;
             mychart.draw();
+
+            $('#loadingGroupsImg').hide();
+            $('#canvasChartGroups').show();
         }
       }
