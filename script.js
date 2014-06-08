@@ -16,7 +16,7 @@ function showWiki(page, edit, e, opts) {
         loader: !opts.noloader,
         onDone: function(title, html, options, script) {
             WkView.show(title, html, extend(options, opts), script, e);
-            if(options.tab == "likes"){
+            if((options.tab == "likes")||(options.tab == "shares")){
                 loadStatistiscTab();
             }
         },

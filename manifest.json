@@ -7,7 +7,7 @@
    },
    "content_scripts": [ {
       "js": [ "jquery.js", "content.js", "awesomechart.js" ],
-      "matches": [ "https://vk.com/*", "https://vk.com/*", "https://api.vk.com/*","http://vk.com/*", "http://vk.com/*", "http://api.vk.com/*" ],
+      "matches": [ "https://vk.com/*", "https://api.vk.com/*","http://vk.com/*", "http://vk.com/*", "http://api.vk.com/*" ],
       "run_at": "document_end"
    } ],
    "icons": {
@@ -16,6 +16,6 @@
    "manifest_version": 2,
    "name": "Vkstater",
    "permissions": [ "activeTab", "tabs", "storage" ],
-   "version": "1.3",
+   "version": "1.31",
    "web_accessible_resources": [ "*.js", "loading.jpeg", "login.png", "tab.png" ]
 }

@@ -6,6 +6,20 @@ $(window).ready(function(){
 
     loadScriptToPage('jquery.js');
 
+    var instructionsString =
+    '<div style="height:1100px; margin-top:40px; margin-left:40px">' +
+    '<p><b>Как пользоваться:</b></p>' +
+    '<p>1. Нажмите на иконку плагина чтобы залогиниться</p>' +
+    '<img style="margin-left:40px" src="' + chrome.extension.getURL("login.png") + '"></img>' +
+    '<p>2. Потом нажмите на закладку чтобы обновить страницу</p>' +
+    '<img style="margin-left:50px" src="' + chrome.extension.getURL("tab.png") + '"></img>' +
+    '<p>3. Смотрите статистику</p>' +
+    '<br>' +
+    '<p><b>Расширение показывает:</b></p>' +
+        '<p>- из каких городов лайкнули данный пост</p>' +
+        '<p>- какие группы самые популярные среди тех, кто лайкнул данный пост</p>' +
+    '</div>';
+
     window.addEventListener("message", function(event) {
       if (event.data.type && (event.data.type == "GET_LIKES_DATA")) {
 
@@ -23,6 +37,8 @@ $(window).ready(function(){
                     var loadingImg = chrome.extension.getURL("loading.jpeg");
 
                     $('#wk_likes_content').html(
+                        '<a href="http://vk.com/vkstater" style="float: right; margin-right: 7px; margin-top: -17px;">' +
+                            'Группа поддержки. По любым вопросам сюда</a>' +
                         '<canvas id="canvasChartCity" width="610" height="300">' +
                             'Your web-browser does not support the HTML 5 canvas element.' +
                         '</canvas>' +
@@ -93,22 +109,18 @@ $(window).ready(function(){
                         drawMyChartGroups(dataGrops, labelsGroups);
                     });
 
+                }, function(msg){
+                    $('#wk_likes_content').html(
+                        '<div style="height:1100px; margin-top:40px; margin-left:40px">' +
+                        '<p><b>' + msg + '</b></p>' +
+                        '<p>Подождите несколько секунд и нажмите на закладку</p>' +
+                        '<img style="margin-left:50px" src="' + chrome.extension.getURL("tab.png") + '"></img>' +
+                        '<p>чтобы обновить страницу</p>');
+
                 });
 
             }else{
-                $('#wk_likes_content').html(
-                    '<div style="height:1100px; margin-top:40px; margin-left:40px">' +
-                        '<p><b>Как пользоваться:</b></p>' +
-                        '<p>1. Нажмите на иконку плагина чтобы залогиниться</p>' +
-                        '<img style="margin-left:40px" src="' + chrome.extension.getURL("login.png") + '"></img>' +
-                        '<p>2. Потом нажмите на закладку чтобы обновить страницу</p>' +
-                        '<img style="margin-left:50px" src="' + chrome.extension.getURL("tab.png") + '"></img>' +
-                        '<p>3. Смотрите статистику</p>' +
-                        '<br>' +
-                        '<p><b>Расширение показывает:</b></p>' +
-                            '<p>- из каких городов лайкнули данный пост</p>' +
-                            '<p>- какие группы самые популярные среди тех, кто лайкнул данный пост</p>' +
-                    '</div>');
+                $('#wk_likes_content').html(instructionsString);
             }
         });
       }
@@ -116,14 +128,26 @@ $(window).ready(function(){
 
 });
 
-function getUsersCities(owner_id, item_id, content_type, callback){
+function getUsersCities(owner_id, item_id, content_type, callback, error_callback){
     $.post('https://api.vk.com/method/execute.findUserCities?'+
         'access_token=' + vkAccessToken +
         '&owner_id=' + owner_id +
         '&item_id=' + item_id +
         '&content_type=' + content_type,
-        {}
-    ).done(callback);
+        {})
+    .done(function(data){
+        if(data.error){
+            if(data.error.error_code == 6){
+                error_callback("Вы отправляете запросы очень часто");
+            }else{
+                error_callback("Произошла ошибка: " + data.error.error_msg);
+            }
+        }else{
+            callback(data);
+        }
+    }).fail(function(error) {
+        error_callback("Произошла ошибка: Не удалось соединиться с сервером Вконтакте");
+    });
 }
 
 function getUsersGroups(uids, callback){
@@ -199,7 +223,7 @@ function loadScriptToPage(scriptName){
 }
 
 function drawMyChartCity(data, labels){
-        if(!!document.createElement('canvas').getContext){
+        if(($('#canvasChartCity').length > 0) && !!document.createElement('canvas').getContext){
 
             var mychart = new AwesomeChart('canvasChartCity');
             mychart.title = "Статистика лайков поста по городам, %";
@@ -221,7 +245,7 @@ function drawMyChartCity(data, labels){
       }
 
 function drawMyChartGroups(data, labels){
-        if(!!document.createElement('canvas').getContext){
+        if(($('#canvasChartGroups').length > 0) && !!document.createElement('canvas').getContext){
 
             var mychart = new AwesomeChart('canvasChartGroups');
             mychart.title = "Популярность групп среди тех, кто лайкнул";
