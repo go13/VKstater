@@ -39,11 +39,29 @@ $(window).ready(function(){
                     $('#wk_likes_content').html(
                         '<a href="http://vk.com/vkstater" style="float: right; margin-right: 7px; margin-top: -17px;">' +
                             'Группа поддержки. По любым вопросам сюда</a>' +
-                        '<canvas id="canvasChartCity" width="610" height="300">' +
+
+                        '<a id="saveCityChartLink" style="' +
+                             'margin-right: 10px;' +
+                             'float: right;' +
+                             'margin-bottom: 1px;' +
+                             'margin-top: 10px;' +
+                             'color: #2B587A" ' +
+                        ' href="#" >Скачать картинку</a>' +
+
+                        '<canvas id="canvasChartCity" width="610" height="300" style="background-color: white">' +
                             'Your web-browser does not support the HTML 5 canvas element.' +
                         '</canvas>' +
                         '<img id="loadingGroupsImg" style="margin-left:100px; margin-bottom:50px" src="' + loadingImg + '"></img>' +
-                        '<canvas id="canvasChartGroups" style="display:none" width="610" height="800">' +
+
+                        '<a id="saveGroupsChartLink" style="' +
+                             'margin-right: 10px;' +
+                             'float: right;' +
+                             'margin-bottom: 1px;' +
+                             'margin-top: 10px;' +
+                             'color: #2B587A" ' +
+                        ' href="#" >Скачать картинку</a>' +
+
+                        '<canvas id="canvasChartGroups" style="display:none; background-color: white" width="610" height="800">' +
                             'Your web-browser does not support the HTML 5 canvas element.' +
                         '</canvas>'
                         );
@@ -241,6 +259,8 @@ function drawMyChartCity(data, labels){
             mychart.barHGap = 5;
             mychart.proportionalSizes = false;
             mychart.draw();
+
+            saveCityChartToFile();
         }
       }
 
@@ -269,5 +289,25 @@ function drawMyChartGroups(data, labels){
 
             $('#loadingGroupsImg').hide();
             $('#canvasChartGroups').show();
+
+            saveGoupsChartToFile();
         }
       }
+
+
+function saveCityChartToFile(){
+    var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
+    var canvas = document.getElementById('canvasChartCity');
+    $('#saveCityChartLink')
+        .attr("href",canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"))
+        .attr("download", "city-stat-" + d + ".png");
+}
+
+function saveGoupsChartToFile(){
+    var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
+    var canvas = document.getElementById('canvasChartGroups');
+    $('#saveGroupsChartLink')
+        .attr("href",canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"))
+        .attr("download", "groups-stat-" + d + ".png");
+}
+

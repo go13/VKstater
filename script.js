@@ -59,4 +59,16 @@ function loadStatistiscTab(){
     });
 
 }
+/*
 
+function saveCityChartToFile(){
+    canvasToImage('canvasChartCity');
+}
+
+function canvasToImage(divId){
+    var canvas = document.getElementById(divId)
+    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream").attr("download", "file-.png");
+    window.location.href=image;
+}
+
+*/

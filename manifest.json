@@ -16,6 +16,6 @@
    "manifest_version": 2,
    "name": "Vkstater",
    "permissions": [ "activeTab", "tabs", "storage" ],
-   "version": "1.31",
+   "version": "1.32",
    "web_accessible_resources": [ "*.js", "loading.jpeg", "login.png", "tab.png" ]
 }
