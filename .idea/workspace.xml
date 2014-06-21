@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3837a9a-32e2-4f6d-a356-61b9248082b0" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/key.pem" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/awesomechart.js" afterPath="$PROJECT_DIR$/awesomechart.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content.js" afterPath="$PROJECT_DIR$/content.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest.json" afterPath="$PROJECT_DIR$/manifest.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script.js" afterPath="$PROJECT_DIR$/script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="VKstater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,10 +69,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="content.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="content.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/content.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="302" column="37" selection-start="10912" selection-end="10912" vertical-scroll-proportion="-12.481482" vertical-offset="4193" max-vertical-offset="4785">
+            <state line="118" column="43" selection-start="5187" selection-end="5187" vertical-scroll-proportion="0.3293919" vertical-offset="1575" max-vertical-offset="5715">
               <folding />
             </state>
           </provider>
@@ -80,16 +81,16 @@
       <file leaf-file-name="awesomechart.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/awesomechart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="30" selection-start="2046" selection-end="2046" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="20940">
+            <state line="71" column="4" selection-start="1955" selection-end="1955" vertical-scroll-proportion="-0.8148148" vertical-offset="1043" max-vertical-offset="21315">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manifest.json" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="manifest.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manifest.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="19" selection-start="565" selection-end="565" vertical-scroll-proportion="0.44481054" vertical-offset="0" max-vertical-offset="607">
+            <state line="12" column="13" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="405">
               <folding />
             </state>
           </provider>
@@ -98,7 +99,7 @@
       <file leaf-file-name="script.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="0" selection-start="1897" selection-end="2211" vertical-scroll-proportion="0.0" vertical-offset="328" max-vertical-offset="1200">
+            <state line="53" column="0" selection-start="1750" selection-end="1750" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200">
               <folding />
             </state>
           </provider>
@@ -127,10 +128,10 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/background.js" />
-        <option value="$PROJECT_DIR$/awesomechart.js" />
         <option value="$PROJECT_DIR$/script.js" />
-        <option value="$PROJECT_DIR$/content.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
+        <option value="$PROJECT_DIR$/awesomechart.js" />
+        <option value="$PROJECT_DIR$/content.js" />
       </list>
     </option>
   </component>
@@ -166,6 +167,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -186,8 +189,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -439,6 +440,76 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/content.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="37" selection-start="10912" selection-end="10912" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4785">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/awesomechart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="30" selection-start="2046" selection-end="2046" vertical-scroll-proportion="0.0" vertical-offset="1110" max-vertical-offset="20940">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manifest.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="13" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="405">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="15" selection-start="1477" selection-end="1477" vertical-scroll-proportion="0.0" vertical-offset="341" max-vertical-offset="1200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/background.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="491" selection-end="491" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="37" selection-start="10912" selection-end="10912" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4785">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/awesomechart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="30" selection-start="2046" selection-end="2046" vertical-scroll-proportion="0.0" vertical-offset="1110" max-vertical-offset="20940">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manifest.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="19" selection-start="565" selection-end="565" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="405">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="0" selection-start="1897" selection-end="2211" vertical-scroll-proportion="0.0" vertical-offset="1095" max-vertical-offset="1200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/background.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="491" selection-end="491" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/content.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="107" column="30" selection-start="4283" selection-end="4283" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3825">
           <folding />
         </state>
@@ -472,9 +543,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/awesomechart.js">
+    <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="30" selection-start="2046" selection-end="2046" vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="20940">
+        <state line="12" column="13" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="405">
           <folding />
         </state>
       </provider>
@@ -488,21 +559,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="1897" selection-end="2211" vertical-scroll-proportion="0.0" vertical-offset="328" max-vertical-offset="1200">
+        <state line="53" column="0" selection-start="1750" selection-end="1750" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/awesomechart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="4" selection-start="1955" selection-end="1955" vertical-scroll-proportion="-0.8148148" vertical-offset="1043" max-vertical-offset="21315">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/content.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="302" column="37" selection-start="10912" selection-end="10912" vertical-scroll-proportion="-12.481482" vertical-offset="4193" max-vertical-offset="4785">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="19" selection-start="565" selection-end="565" vertical-scroll-proportion="0.44481054" vertical-offset="0" max-vertical-offset="607">
+        <state line="118" column="43" selection-start="5187" selection-end="5187" vertical-scroll-proportion="0.3293919" vertical-offset="1575" max-vertical-offset="5715">
           <folding />
         </state>
       </provider>

@@ -765,7 +765,7 @@ function AwesomeChart(canvasElementId){
         }
 
         var doublePI = 2 * Math.PI;
-        var radius = (Math.min( pieAreaWidth, pieAreaHeight) / 2);
+        var radius = this.pieRadius; //(Math.min( pieAreaWidth, pieAreaHeight) / 2);
         
         context.font = this.labelFontStyle + ' ' + this.labelFontHeight + 'px '+ this.labelFont;
         var maxLabelWidth = 0;
@@ -776,14 +776,17 @@ function AwesomeChart(canvasElementId){
                 maxLabelWidth = labelWidth;
             }
         }
-        
-        radius = radius - maxLabelWidth - this.labelMargin;
-        
+        if(this.pieHorisontalLegend){
+            radius = radius - this.labelMargin;
+        }else{
+            radius = radius - maxLabelWidth - this.labelMargin;
+        }
+
         var startAngle = this.pieStart* doublePI / dataSumForStartAngle;
         var currentAngle = startAngle;
         var endAngle = 0;
         var incAngleBy = 0;
-        
+
         for(var i=0; i<dataLen; i++){
             context.beginPath();
             incAngleBy = this.data[i] * doublePI / dataSum;
@@ -881,43 +884,65 @@ function AwesomeChart(canvasElementId){
         
         
         // draw the labels:
-        
-        var currentAngle = this.pieStart* doublePI / dataSumForStartAngle;
-        var endAngle = 0;
-        var incAngleBy = 0;
-        
-        context.beginPath();
-        
 
-        for(var i=0; i<this.data.length; i++){
-            context.save();
-            incAngleBy = this.data[i] * doublePI / dataSum;
-            endAngle = currentAngle + incAngleBy;
-            
-            var mAngle = currentAngle +  incAngleBy/2;
-            context.translate(centerX, centerY);
-            context.rotate(mAngle);
-            
-            context.font = this.labelFontStyle + ' ' + this.labelFontHeight + 'px '+ this.labelFont;
-            if(this.colors[i]){
-                context.fillStyle = this.colors[i];
-            }else{
-                context.fillStyle = this.labelFillStyle;
-            }
-            context.textAlign = 'start';
-            if(this.labels[i]){
-                if( (mAngle>Math.PI/2) && (mAngle<=3*(Math.PI/2)) ){
-                    var translateXBy = radius + this.labelMargin + context.measureText(this.labels[i]).width / 2;
-                    context.translate(translateXBy, 0);
-                    context.rotate(Math.PI);
-                    context.translate(-translateXBy, 0);
+        if(this.pieHorisontalLegend){
+            context.beginPath();
+
+            for(var i=0; i < this.data.length; i++){
+                context.save();
+                context.font = this.labelFontStyle + ' ' + this.labelFontHeight + 'px '+ this.labelFont;
+                if(this.colors[i]){
+                    context.fillStyle = this.colors[i];
+                }else{
+                    context.fillStyle = this.labelFillStyle;
                 }
-                context.textBaseline = 'middle';
-                context.fillText(this.labels[i], radius+this.labelMargin, 0);
+                context.textAlign = 'start';
+                if(this.labels[i]){
+                    context.textBaseline = 'top';
+                    context.fillText(this.labels[i], centerX + radius + 25, centerY + (10 + this.labelFontHeight) * i, context.measureText(this.labels[i]).width);
+                }
+
+                context.restore();
             }
-            
-            context.restore();
-            currentAngle = endAngle;
+        }else{
+
+            var currentAngle = this.pieStart* doublePI / dataSumForStartAngle;
+            var endAngle = 0;
+            var incAngleBy = 0;
+
+            context.beginPath();
+
+
+            for(var i=0; i < this.data.length; i++){
+                context.save();
+                incAngleBy = this.data[i] * doublePI / dataSum;
+                endAngle = currentAngle + incAngleBy;
+
+                var mAngle = currentAngle +  incAngleBy/2;
+                context.translate(centerX, centerY);
+                context.rotate(mAngle);
+
+                context.font = this.labelFontStyle + ' ' + this.labelFontHeight + 'px '+ this.labelFont;
+                if(this.colors[i]){
+                    context.fillStyle = this.colors[i];
+                }else{
+                    context.fillStyle = this.labelFillStyle;
+                }
+                context.textAlign = 'start';
+                if(this.labels[i]){
+                    if( (mAngle>Math.PI/2) && (mAngle<=3*(Math.PI/2)) ){
+                        var translateXBy = radius + this.labelMargin + context.measureText(this.labels[i]).width / 2;
+                        context.translate(translateXBy, 0);
+                        context.rotate(Math.PI);
+                        context.translate(-translateXBy, 0);
+                    }
+                    context.textBaseline = 'middle';
+                    context.fillText(this.labels[i], radius+this.labelMargin, 0);
+                }
+
+                context.restore();
+                currentAngle = endAngle;
+            }
         }
     }
     

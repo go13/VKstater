@@ -63,8 +63,16 @@ $(window).ready(function(){
 
                         '<canvas id="canvasChartGroups" style="display:none; background-color: white" width="610" height="800">' +
                             'Your web-browser does not support the HTML 5 canvas element.' +
+                        '</canvas>' +
+
+                        '<canvas id="canvasChartSex" style="display:none; background-color: white" width="600" height="400">' +
+                            'Your web-browser does not support the HTML 5 canvas element.' +
                         '</canvas>'
+
                         );
+                    var sexM = 0;
+                    var sexW = 0;
+                    var sexTotal = 0;
 
                     var set = {};
                     var withCities = 0;
@@ -81,10 +89,35 @@ $(window).ready(function(){
                                 set[title]={title: title, num: 1};
                                 withCities++;
                             }
+
+                            if(el.sex == 2){
+                                sexM++;
+                            } else if(el.sex == 1){
+                                sexW++;
+                            }
+                            sexTotal++;
                         }
                         ids.push(el.id);
 
                     });
+
+                    var sexData = [];
+                    if(sexTotal != 0){
+                        sexData.push(Math.round(100*sexM/sexTotal));
+                        sexData.push(Math.round(100*sexW/sexTotal));
+                    }else{
+                        sexData.push(Math.round(0));
+                        sexData.push(Math.round(0));
+                    }
+
+                    var sexLabels = [];
+                    sexLabels.push("Мужчины - " + Math.round(100*sexM/sexTotal) + "%");
+                    sexLabels.push("Женщины - " + Math.round(100*sexW/sexTotal) + "%");
+
+                    var sexColors = [];
+                    sexColors.push("#597BA5");
+                    sexColors.push("#DA1D1D");
+                    drawMyChartSex(sexData, sexLabels, sexColors, 100);
 
                     var arr = [];
 
@@ -294,6 +327,35 @@ function drawMyChartGroups(data, labels){
         }
       }
 
+
+function drawMyChartSex(data, labels, colors, total){
+        if(($('#canvasChartSex').length > 0) && !!document.createElement('canvas').getContext){
+
+            var mychart = new AwesomeChart('canvasChartSex');
+            mychart.title = "Пол";
+            mychart.titleFontHeight = 14;
+            mychart.data = data;
+            mychart.labels = labels;
+            mychart.barFillStyle = "#597BA5";
+            mychart.barStrokeStyle = "#597BA5";
+            mychart.barBorderWidth = 0;
+            mychart.barShadowBlur = 0;
+            mychart.barShadowColor = "#597BA5";
+            mychart.labelFillStyle = "#000000";
+            mychart.labelFontHeight = 14;
+            mychart.barHGap = 5;
+            mychart.chartType = "pie";
+            mychart.pieTotal = total;
+            mychart.colors = colors;
+            mychart.pieHorisontalLegend = true;
+            mychart.pieRadius = 150;
+            mychart.draw();
+
+            $('#canvasChartSex').show();
+
+            saveGoupsChartToFile();
+        }
+      }
 
 function saveCityChartToFile(){
     var d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
