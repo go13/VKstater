@@ -1,6 +1,6 @@
 {
    "background": {
-      "scripts": [ "jquery.js", "background.js" ]
+      "scripts": [ "jquery.js", "background.js", "charts/d3.js", "charts/dc.js", "charts/crossfilter.js" ]
    },
    "browser_action": {
       "default_icon": "icon_128.png"
@@ -15,7 +15,8 @@
    },
    "manifest_version": 2,
    "name": "Vkstater",
-   "permissions": [ "activeTab", "tabs", "storage" ],
-   "version": "1.32",
+   "permissions": [ "activeTab", "tabs", "storage", "https://api.vk.com/*" ],
+   "version": "1.33",
    "web_accessible_resources": [ "*.js", "loading.jpeg", "login.png", "tab.png" ]
 }
+

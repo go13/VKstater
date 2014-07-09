@@ -21,7 +21,10 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
                     chrome.tabs.onUpdated.removeListener(tabUpdateListener);
 
-                    chrome.tabs.remove(tabid);
+                    var homeUrl = chrome.extension.getURL("home.html");
+
+                    chrome.tabs.update(tabid, {url: homeUrl});
+
                 }
             }
 
@@ -40,7 +43,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function getUrlParameterValue(url, parameterName) {
-    "use strict";
 
     var urlParameters  = url.substr(url.indexOf("#") + 1),
         parameterValue = "",
