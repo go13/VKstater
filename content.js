@@ -2,16 +2,19 @@ var vkAccessToken = null;
 
 $(window).ready(function(){
 
-    loadScriptToPage('script.js');
+    if(window.location.host = "vk.com"){
+        loadScriptToPage('script.js');
 
-    loadScriptToPage('jquery.js');
+        loadScriptToPage('jquery.js');
 
-    window.addEventListener("message", function(event) {
-      if (event.data.type && (event.data.type == "OPEN_NEW_STAT_WINDOW")) {
-        chrome.runtime.sendMessage({method: "OPEN_NEW_STAT_WINDOW", ref : event.data.ref},
-            function(response) {});
-      }
-    }, false);
+        window.addEventListener("message", function(event) {
+          if (event.data.type && (event.data.type == "OPEN_NEW_STAT_WINDOW")) {
+            chrome.runtime.sendMessage({method: "OPEN_NEW_STAT_WINDOW", ref : event.data.ref},
+                function(response) {});
+          }
+        }, false);
+
+    }
 
 });
 
