@@ -2,7 +2,7 @@ var vkAccessToken = null;
 
 $(window).ready(function(){
 
-    if(window.location.host = "vk.com"){
+    if(window.location.host == "vk.com"){
         loadScriptToPage('script.js');
 
         loadScriptToPage('jquery.js');
