@@ -6,7 +6,7 @@
       "default_icon": "icon_128.png"
    },
    "content_scripts": [ {
-      "js": [ "jquery.js", "content.js", "awesomechart.js" ],
+      "js": [ "jquery.js", "content.js" ],
       "matches": [ "https://vk.com/*", "https://api.vk.com/*","http://vk.com/*", "http://vk.com/*", "http://api.vk.com/*" ],
       "run_at": "document_end"
    } ],
@@ -17,6 +17,6 @@
    "name": "Vkstater",
    "permissions": [ "activeTab", "tabs", "storage", "https://api.vk.com/*" ],
    "version": "1.33",
-   "web_accessible_resources": [ "*.js", "loading.jpeg", "login.png", "tab.png" ]
+   "web_accessible_resources": [ "*.js"]
 }
 

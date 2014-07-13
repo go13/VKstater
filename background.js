@@ -42,6 +42,20 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       sendResponse({}); // snub them.
 });
 
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.method == "OPEN_NEW_STAT_WINDOW"){
+
+        var homeUrl = chrome.extension.getURL("home.html") + "#ref=" + request.ref;
+
+        chrome.tabs.create({url: homeUrl, selected: true}, function (tab) {
+
+        });
+
+        sendResponse({}); // snub them.
+    }else
+      sendResponse({}); // snub them.
+});
+
 function getUrlParameterValue(url, parameterName) {
 
     var urlParameters  = url.substr(url.indexOf("#") + 1),

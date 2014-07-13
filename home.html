@@ -7,41 +7,50 @@
         <script type="text/javascript" src="charts/crossfilter.js"></script>
         <script type="text/javascript" src="charts/dc.js"></script>
         <script type="text/javascript" src="jquery.js"></script>
+
+
         <script src="charts/app.js" type="text/javascript"></script>
+
         <style>
             #chart-city g.row text {
                 fill: black;
+                font-size: 14;
             }
             #chart-groups g.row text {
                 fill: black;
+                font-size: 14;
             }
             #chart-gender .pie-slice {
                 font-size: 40px;
             }
-            .chart-class{
-                float: left;
-                margin-top: 20px;
-            }
-            .chart-class label{
-                margin-left: 50px;
-            }
-            .chart-class div{
-                margin-top: 20px;
-            }
         </style>
     </head>
     <body>
-        <div class="chart-class">
-            <label class="title-class">Города</label>
-            <div id="chart-city"></div>
+        <div style="margin-top:25px; margin-left:100px">
+
+            <input id="reference" style="font: status-bar;width: 400;" value="wall1_45624">
+            <button id="go-btn" style="height:26px;">Поехали!</button>
+
         </div>
-        <div class="chart-class">
-            <label class="title-class">Группы</label>
-            <div id="chart-groups"></div>
+        <div id="spinner" style="margin-top: 200px;">
+            <img src="ajax-loader.gif" style="margin-left: auto;margin-right: auto; display:block"></div>
         </div>
-        <div class="chart-class">
-            <label class="title-class">Муж / Жен</label>
-            <div id="chart-gender"></div>
+
+        <div id="content" style="margin-left:50px; margin-top:25px; ">
+            <div>
+                <label style="margin-left:50px">Муж / Жен</label>
+                <div id="chart-gender" style="margin-top:25px;margin-left:25px"></div>
+            </div>
+            <div style="float:left; margin-top:25px; display: flex;">
+                <div style="margin-top:25px;float:left;">
+                    <label id="chart-cities-label" style="margin-left:50px">Города</label>
+                    <div id="chart-city"></div>
+                </div>
+                <div style="margin-top:25px;float:left;">
+                    <label id="chart-groups-label" style="margin-left:50px">Группы (ТОП 50)</label>
+                    <div id="chart-groups"></div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
