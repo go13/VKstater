@@ -122,7 +122,7 @@ function hideContent(){
     $("#content").hide();
     $("#spinner").show();
     $("#go-btn").attr('disabled','disabled');
-    $("#go-btn").html("Грузим...");
+    $("#go-btn").html("Ждите...");
     $("#reference").attr('disabled','disabled');
 }
 
