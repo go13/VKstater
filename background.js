@@ -1,4 +1,8 @@
 chrome.browserAction.onClicked.addListener(function(tab) {
+    login();
+});
+
+function login(){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
         var vkCLientId           = '4346186',
@@ -32,28 +36,35 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
         });
    });
-});
+}
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.method == "getLocalStorage"){
+
         var vkAccessToken = localStorage["vkAccessToken"];
         sendResponse({'vkAccessToken' : vkAccessToken});
-    }else
+
+    } else if (request.method == "OPEN_NEW_STAT_WINDOW"){
+
+      var homeUrl = chrome.extension.getURL("home.html") + "#ref=" + request.ref;
+
+      chrome.tabs.create({url: homeUrl, selected: true}, function (tab) {
+
+      });
+
       sendResponse({}); // snub them.
-});
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.method == "OPEN_NEW_STAT_WINDOW"){
+    }if (request.method == "RELOGIN"){
 
-        var homeUrl = chrome.extension.getURL("home.html") + "#ref=" + request.ref;
-
-        chrome.tabs.create({url: homeUrl, selected: true}, function (tab) {
-
-        });
+        login();
 
         sendResponse({}); // snub them.
-    }else
-      sendResponse({}); // snub them.
+
+    } else {
+
+        sendResponse({}); // snub them.
+
+    }
 });
 
 function getUrlParameterValue(url, parameterName) {

@@ -91,9 +91,22 @@ function analize(reference){
 
             showContent();
 
+        }, function(error) {
+            showError(error);
         });
+    }, function(error) {
+        showError(error);
     });
 
+}
+
+function showError(error){
+    $("#error").css("display", "block");
+    $("#spinner").hide();
+    $("#go-btn").removeAttr('disabled');
+    $("#go-btn").html("Поехали!");
+    $("#reference").removeAttr('disabled');
+    $("#error_msg").html("Описание: " + error.statusText);
 }
 
 function showContent(){
@@ -105,6 +118,7 @@ function showContent(){
 }
 
 function hideContent(){
+    $("#error").css("display", "none");
     $("#content").hide();
     $("#spinner").show();
     $("#go-btn").attr('disabled','disabled');
@@ -266,7 +280,7 @@ function getUsersCities(owner_id, item_id, content_type, callback, error_callbac
             callback(data);
         }
     }).fail(function(error) {
-        error_callback("Произошла ошибка: Не удалось соединиться с сервером Вконтакте");
+        error_callback(error);
     });
 }
 
@@ -279,13 +293,14 @@ function extractUserIds(response){
 }
 
 
-function getUsersGroups(uids, callback){
+function getUsersGroups(uids, callback, error_callback){
     var step = 20;
     var composed = [];
     var ids = uids;
     var callCount = Math.ceil(ids.length / step);
+    var toBreak = false;
 
-    while(ids.length > 0){
+    while(ids.length > 0 && !toBreak){
 
         getUsersGroupsPortion(ids.slice(0, step), function(data){
             callCount--;
@@ -294,18 +309,23 @@ function getUsersGroups(uids, callback){
             if(callCount == 0){
                 callback(composed);
             }
+        }, function(error){
+            toBreak = true;
+            error_callback(error);
         });
 
         ids = ids.slice(step, ids.length);
     }
 }
 
-function getUsersGroupsPortion(portion, callback){
+function getUsersGroupsPortion(portion, callback, error_callback){
     $.post('https://api.vk.com/method/execute.findUserGroups?'+
         'access_token=' + vkAccessToken +
         '&uids=' + portion.toString(),
         {}
     ).done(function(data){
         callback(data);
-    });
+    }).fail(function(error) {
+        error_callback(error);
+     });
 }

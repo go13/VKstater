@@ -32,6 +32,16 @@
             <button id="go-btn" style="height:26px;">Поехали!</button>
 
         </div>
+
+        <div id="error" style="margin-top: 10px; display: none;margin-left:100px;">
+            <label style="color:red;margin-top: 10px;">
+                Произошла ошибка. Попробуйте перезайти в расширение, нажав на иконку плагина в правом верхнем углу экрана
+            </label>
+            <br>
+            <label id="error_msg" style="font-size: small;">
+            </label>
+        </div>
+
         <div id="spinner" style="margin-top: 200px;">
             <img src="ajax-loader.gif" style="margin-left: auto;margin-right: auto; display:block"></div>
         </div>
@@ -39,7 +49,7 @@
         <div id="content" style="margin-left:50px; margin-top:25px; ">
             <div>
                 <label style="margin-left:50px">Муж / Жен</label>
-                <div id="chart-gender" style="margin-top:25px;margin-left:25px"></div>
+                <div id="chart-gender" style="margin-top:25px;margin-left:25px; float: none;"></div>
             </div>
             <div style="float:left; margin-top:25px; display: flex;">
                 <div style="margin-top:25px;float:left;">
