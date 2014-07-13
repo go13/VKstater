@@ -6,7 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3837a9a-32e2-4f6d-a356-61b9248082b0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/charts/app.js" afterPath="$PROJECT_DIR$/charts/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.html" afterPath="$PROJECT_DIR$/home.html" />
     </list>
     <ignored path="VKstater.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,13 +70,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="home.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="home.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="16" selection-start="1558" selection-end="1558" vertical-scroll-proportion="-4.7916665" vertical-offset="530" max-vertical-offset="1125">
+            <state line="37" column="41" selection-start="1283" selection-end="1283" vertical-scroll-proportion="0.34453782" vertical-offset="350" max-vertical-offset="1170">
               <folding>
                 <element signature="n#style#0;n#a#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#label#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -88,10 +90,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/charts/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="124" column="28" selection-start="3137" selection-end="3137" vertical-scroll-proportion="0.33277026" vertical-offset="1663" max-vertical-offset="5040">
+            <state line="124" column="28" selection-start="3137" selection-end="3137" vertical-scroll-proportion="-7.296296" vertical-offset="1663" max-vertical-offset="5040">
               <folding />
             </state>
           </provider>
@@ -161,8 +163,8 @@
         <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/content.js" />
         <option value="$PROJECT_DIR$/background.js" />
-        <option value="$PROJECT_DIR$/home.html" />
         <option value="$PROJECT_DIR$/charts/app.js" />
+        <option value="$PROJECT_DIR$/home.html" />
       </list>
     </option>
   </component>
@@ -578,6 +580,8 @@
           <folding>
             <element signature="n#style#0;n#a#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#label#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -620,6 +624,8 @@
           <folding>
             <element signature="n#style#0;n#a#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#label#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -819,12 +825,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/charts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="28" selection-start="3137" selection-end="3137" vertical-scroll-proportion="-7.296296" vertical-offset="1663" max-vertical-offset="5040">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="16" selection-start="1558" selection-end="1558" vertical-scroll-proportion="-4.7916665" vertical-offset="530" max-vertical-offset="1125">
+        <state line="37" column="41" selection-start="1283" selection-end="1283" vertical-scroll-proportion="0.34453782" vertical-offset="350" max-vertical-offset="1170">
           <folding>
             <element signature="n#style#0;n#a#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#label#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -832,13 +847,6 @@
             <element signature="n#style#0;n#label#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/charts/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="28" selection-start="3137" selection-end="3137" vertical-scroll-proportion="0.33277026" vertical-offset="1663" max-vertical-offset="5040">
-          <folding />
         </state>
       </provider>
     </entry>
