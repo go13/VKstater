@@ -197,9 +197,15 @@ function drawGroupChart(cf, divId, map){
 
     groupChart.onClick = function(d){
         var fname = d.key;
-        var screen_name = map[fname].screen_name;
-        var link = "http://vk.com/" + screen_name;
-        window.open(link);
+        var el = map[fname];
+        if(el.type == 'profile'){
+            var link = "http://vk.com/id" + el.id;
+            window.open(link);
+        }else{
+            var screen_name = el.screen_name;
+            var link = "http://vk.com/" + screen_name;
+            window.open(link);
+        }
     };
 }
 
