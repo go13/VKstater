@@ -1,7 +1,5 @@
 var vkAccessToken = null;
 
-var laddaBtn = null;
-
 $(window).ready(function(){
     chrome.runtime.sendMessage({method: "getLocalStorage"}, function(response) {
             vkAccessToken = response.vkAccessToken;
@@ -71,6 +69,7 @@ function analize(reference){
 
         drawCityChart(cf1, "#chart-city");
         drawGenderChart(cf1, "#chart-gender");
+        drawAgeChart(cf1, "#chart-age");
 
         var ids = extractUserIds(data.response);
 
@@ -126,6 +125,51 @@ function hideContent(){
     $("#reference").attr('disabled','disabled');
 }
 
+function drawAgeChart(cf, divId){
+    var groups = cf.dimension(function(d){
+        if(typeof d.bdate == "undefined"){
+            return 'Возраст не определен';
+        }else{
+            var bdate = d.bdate;
+            var par = bdate.match(/(\d+)\.(\d+)\.(\d+)/);
+
+            if(par != null){
+                var year = parseInt(par[3]);
+                var currentYear = new Date().getFullYear();
+                var r = currentYear - year;
+                return r.toString();
+            }else{
+                return 'Возраст не определен';
+            }
+        }
+    });
+
+    var chartGroup = groups.group();
+    var groupChart = dc.barChart(divId);
+
+    groupChart
+    .width(600)
+    .height(200)
+    .gap(5)
+    .dimension(groups)
+    .group({
+        all: function() {
+            var g = [];
+            var all = chartGroup.all();
+            all.forEach(function(d, i) {
+                if(d.key != 'Возраст не определен') {
+                    g.push({key: d.key, value: d.value});
+                }
+            });
+            return g;
+        }
+    })
+    .elasticY(true)
+    .x(d3.scale.ordinal())
+    .xUnits(dc.units.ordinal);
+
+    $(divId + "-label").html("Возраст");
+}
 
 function drawCityChart(cf, divId){
     var citiesToShow = 50;
@@ -155,7 +199,7 @@ function drawCityChart(cf, divId){
     .othersLabel("Другие")
     .xAxis().tickFormat(d3.format("d"));
 
-    $("#chart-cities-label").html("Города (ТОП " + (chartGroup.size() < citiesToShow ? chartGroup.size() : citiesToShow) + ")");
+    $(divId + "-label").html("Города (ТОП " + (chartGroup.size() < citiesToShow ? chartGroup.size() : citiesToShow) + ")");
 }
 
 function getGroupName(d){
@@ -193,7 +237,7 @@ function drawGroupChart(cf, divId, map){
     .othersGrouper(false)
     .xAxis().tickFormat(d3.format("d"));
 
-    $("#chart-groups-label").html("Группы (ТОП " + (chartGroup.size() < groupsToShow ? chartGroup.size() : groupsToShow) + ")");
+    $(divId + "-label").html("Группы (ТОП " + (chartGroup.size() < groupsToShow ? chartGroup.size() : groupsToShow) + ")");
 
     groupChart.onClick = function(d){
         var fname = d.key;

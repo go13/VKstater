@@ -26,7 +26,8 @@
         </style>
     </head>
     <body>
-        <a href="http://vk.com/vkstater" style="font-size: small;margin-top: 25px;margin-right: 65px;margin-bottom: 10px;float: right;">
+        <a href="http://vk.com/vkstater"
+           style="font-size: small;margin-top: 25px;margin-right: 200px;margin-bottom: 10px;float: right;">
             Группа поддержки. По всем вопросам сюда
         </a>
 
@@ -37,7 +38,6 @@
             <br>
             <input id="reference" style="font: status-bar;width: 400;" value="wall1_45624">
             <button id="go-btn" style="height:26px;">Поехали!</button>
-
         </div>
 
         <div id="error" style="margin-top: 10px; display: none;margin-left:100px;">
@@ -54,11 +54,15 @@
         </div>
 
         <div id="content" style="margin-left:50px; margin-top:25px; ">
-            <div>
-                <label style="margin-left:50px">Муж / Жен</label>
-                <div id="chart-gender" style="margin-top:25px;margin-left:30px; float: none;"></div>
+            <div style="float: left;margin-left:50px">
+                <label style="margin-left:30px">Муж / Жен</label>
+                <div id="chart-gender" style="margin-top:45px; float: none;"></div>
             </div>
-            <div style="float:left; margin-top:25px; display: flex;">
+            <div>
+                <label style="float: left;margin-left: 350px;">Возраст</label>
+                <div id="chart-age" style="float: left;margin-left: 180px;margin-top: 20px;"></div>
+            </div>
+            <div style="float:left; display: flex;">
                 <div style="margin-top:25px;float:left;">
                     <label id="chart-cities-label" style="margin-left:50px">Города</label>
                     <div id="chart-city"></div>
