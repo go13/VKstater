@@ -148,7 +148,7 @@ function drawAgeChart(cf, divId){
     var groupChart = dc.barChart(divId);
 
     groupChart
-    .width(600)
+    .width(800)
     .height(200)
     .gap(5)
     .dimension(groups)
