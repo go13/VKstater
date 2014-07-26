@@ -87,14 +87,13 @@ function extractContentId(link){
 
 function analize(reference){
 
+        $("#reference").val(reference);
+
+        window.location.hash = "ref=" + reference;
+
         getToken(function(token) {
 
             vkAccessToken = token;
-
-
-            $("#reference").val(reference);
-
-            window.location.hash = "ref=" + reference;
 
             hideContent();
 
