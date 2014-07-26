@@ -16,7 +16,7 @@
    "manifest_version": 2,
    "name": "Vkstater",
    "permissions": [ "activeTab", "tabs", "storage", "https://api.vk.com/*" ],
-   "version": "2.3",
+   "version": "2.30",
    "web_accessible_resources": [ "*.js"]
 }
 
