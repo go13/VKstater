@@ -25,51 +25,59 @@
             }
         </style>
     </head>
-    <body>
-        <a href="http://vk.com/vkstater"
-           style="font-size: small;margin-top: 25px;margin-right: 200px;margin-bottom: 10px;float: right;">
-            Группа поддержки. По всем вопросам сюда
-        </a>
+    <body style="background-color: cadetblue;">
+        <div style="margin-left: 50px;margin-right: 50px;position: absolute;right: 10px;left: 10px;;background-color: white;top: 0;">
+            <a href="http://vk.com/vkstater"
+               style="font-size: small;margin-top: 25px;margin-right: 200px;margin-bottom: 10px;float: right;">
+                Группа поддержки. По всем вопросам сюда
+            </a>
 
-        <div style="margin-top:25px; margin-left:80px">
-            <label style="font-size: small">
-                Вставьте сюда ссылку на пост, который вы хотите проанализировать
-            </label>
-            <br>
-            <input id="reference" style="font: status-bar;width: 400;" value="wall1_45624">
-            <button id="go-btn" style="height:26px;">Поехали!</button>
-        </div>
-
-        <div id="error" style="margin-top: 10px; display: none;margin-left:100px;">
-            <label style="color:red;margin-top: 10px;">
-                Произошла ошибка. Попробуйте перезайти в расширение, нажав на иконку плагина в правом верхнем углу экрана
-            </label>
-            <br>
-            <label id="error_msg" style="font-size: small;">
-            </label>
-        </div>
-
-        <div id="spinner" style="margin-top: 200px;">
-            <img src="ajax-loader.gif" style="margin-left: auto;margin-right: auto; display:block"></div>
-        </div>
-
-        <div id="content" style="margin-left:50px; margin-top:25px; ">
-            <div style="float: left;margin-left:60px">
-                <label style="margin-left:30px">Муж / Жен</label>
-                <div id="chart-gender" style="margin-top:45px; float: none;"></div>
+            <div style="margin-top:25px; margin-left:40px">
+                <label style="font-size: small">
+                    Вставьте сюда ссылку на пост, который вы хотите проанализировать
+                </label>
+                <br>
+                <input id="reference" style="font: status-bar;width: 400;" value="wall1_45624">
+                <button id="go-btn" style="height:26px;">Поехали!</button>
             </div>
-            <div>
-                <label style="float: left;margin-left: 350px;">Возраст</label>
-                <div id="chart-age" style="float: left;margin-left: 30px;margin-top: 20px;"></div>
+
+            <div id="error" style="margin-top: 10px; display: none;margin-left:60px;">
+                <label style="color:red;margin-top: 10px;">
+                    Произошла ошибка. Попробуйте перезайти в расширение, нажав на иконку плагина в правом верхнем углу экрана
+                </label>
+                <br>
+                <label id="error_msg" style="font-size: small;">
+                </label>
             </div>
-            <div style="float:left; display: flex;">
-                <div style="margin-top:25px;float:left;">
-                    <label id="chart-city-label" style="margin-left:50px">Города (ТОП 50)</label>
-                    <div id="chart-city"></div>
+
+            <div id="spinner" style="margin-top: 200px;margin-bottom: 800px;">
+                <img src="ajax-loader.gif" style="margin-left: auto;margin-right: auto; display:block"/>
+            </div>
+
+            <div id="content" style="margin-left:10px; margin-top:25px; ">
+                <div style="float: left;margin-left: 30px;width:210px">
+                    <a id="owner_id_ref_name" target="_blank"></a>
+                    <a id="owner_id_ref" href="" target="_blank" style="float: left; margin-top: 30px;">
+                        <img id="owner_id" style="height: 200px; width: 200px;" src="" href=""/>
+                    </a>
                 </div>
-                <div style="margin-top:25px;float:left;">
-                    <label id="chart-groups-label" style="margin-left:50px">Группы (ТОП 50)</label>
-                    <div id="chart-groups"></div>
+                <div style="float: left;margin-left: 50px;">
+                    <label style="margin-left:30px">Муж / Жен</label>
+                    <div id="chart-gender" style="margin-top:70px; float: none;"></div>
+                </div>
+                <div style="margin-left: 50px;">
+                    <label style="margin-left: 260px;">Возраст</label>
+                    <div id="chart-age" style="margin-top: 60px;margin-left:30px"></div>
+                </div>
+                <div style="float:left; display: flex;">
+                    <div style="margin-top:25px;float:left;">
+                        <label id="chart-city-label" style="margin-left:50px">Города (ТОП 50)</label>
+                        <div id="chart-city"></div>
+                    </div>
+                    <div style="margin-top:25px;float:left;">
+                        <label id="chart-groups-label" style="margin-left:50px">Группы (ТОП 50)</label>
+                        <div id="chart-groups"></div>
+                    </div>
                 </div>
             </div>
         </div>

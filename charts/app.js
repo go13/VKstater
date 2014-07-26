@@ -47,7 +47,6 @@ function getToken(callback, failure){
 
                 callback(vkAccessToken);
 
-
             } else {
 
                 chrome.runtime.sendMessage({method: "RELOGIN"}, function (response) {
@@ -99,7 +98,22 @@ function analize(reference){
 
             var matches = reference.match(/(wall|wall_reply|photo|photo_comment|video|video_comment|note|audio|topic_comment)(-?\d+)_(\d+)/);
 
-            getUsersCities(matches[2], matches[3], matches[1], function (data) {
+            var owner_id = matches[2];
+
+            getOwnerById(owner_id, function(owner){
+                if(typeof owner.uid == 'undefined') {
+                    $('#owner_id').attr('src', owner.photo_big);
+                    $('#owner_id_ref').attr('href', 'http://vk.com/' + owner.screen_name);
+                    $('#owner_id_ref_name').attr('href', 'http://vk.com/' + owner.screen_name);
+                }else{
+                    $('#owner_id').attr('src', owner.photo_max);
+                    $('#owner_id_ref').attr('href', 'http://vk.com/id' + owner.uid);
+                    $('#owner_id_ref_name').attr('href', 'http://vk.com/id' + owner.uid);
+                }
+                $('#owner_id_ref_name').text(getGroupName(owner));
+            });
+
+            getUsersCities(owner_id, matches[3], matches[1], function (data) {
 
                 var cf1 = crossfilter(data.response);
 
@@ -201,7 +215,7 @@ function drawAgeChart(cf, divId){
     var groupChart = dc.barChart(divId);
 
     groupChart
-    .width(800)
+    .width(600)
     .height(200)
     .gap(5)
     .dimension(groups)
@@ -367,7 +381,6 @@ function extractUserIds(response){
     return arr;
 }
 
-
 function getUsersGroups(uids, callback, error_callback){
     var step = 20;
     var composed = [];
@@ -402,5 +415,54 @@ function getUsersGroupsPortion(portion, callback, error_callback){
         callback(data);
     }).fail(function(error) {
         error_callback(error);
-     });
+    });
+}
+
+function getOwnerById(id, callback){
+
+    id = parseInt(id);
+
+    if(id > 0){
+        getUserById(id, callback, function(error){
+
+        });
+    }else{
+        getGroupById(-id, callback, function(error){
+
+        });
+    }
+}
+
+function getUserById(uid, callback, error_callback){
+    $.post('https://api.vk.com/method/users.get?'+
+        'access_token=' + vkAccessToken +
+        '&user_ids=' + uid,
+        '&fields=photo_max',
+        {}
+    ).done(function(data){
+        if(typeof data.response != "undefined"){
+            callback(data.response[0]);
+        }else{
+            error_callback(data);
+        }
+    }).fail(function(error) {
+        error_callback(error);
+    });
+}
+
+function getGroupById(gid, callback, error_callback){
+    $.post('https://api.vk.com/method/groups.getById?'+
+        'access_token=' + vkAccessToken +
+        '&group_ids=' + gid,
+        {}
+    ).done(function(data){
+
+        if(typeof data.response != "undefined"){
+            callback(data.response[0]);
+        }else{
+            error_callback(data);
+        }
+    }).fail(function(error) {
+        error_callback(error);
+    });
 }
