@@ -1,26 +1,14 @@
 var vkAccessToken = null;
 
 $(window).ready(function(){
-    chrome.runtime.sendMessage({method: "getLocalStorage"}, function(response) {
-            vkAccessToken = response.vkAccessToken;
-            if(vkAccessToken){
-                var link = $("#reference").val();
 
-                var params = window.location.hash.substring(1).split('&');
+    hideContent();
 
-                for(var i = 0; i < params.length; i++){
-                    var vals = params[i].split("=");
+    var link = $("#reference").val();
 
-                    if(vals[0] == "ref"){
-                        link = vals[1];
-                        break;
-                    }
+    link = parseLink(link);
 
-                }
-
-                analize(link);
-            }
-    });
+    analize(link);
 
     $("#go-btn").click(function(){
 
@@ -48,6 +36,50 @@ $(window).ready(function(){
 
 });
 
+function getToken(callback, failure){
+
+    if(typeof vkAccessToken == "undefined" || vkAccessToken == null) {
+
+        chrome.runtime.sendMessage({method: "getLocalStorage"}, function (response) {
+            vkAccessToken = response.vkAccessToken;
+
+            if (vkAccessToken) {
+
+                callback(vkAccessToken);
+
+
+            } else {
+
+                chrome.runtime.sendMessage({method: "RELOGIN"}, function (response) {
+                    if (failure) {
+                        failure();
+                    }
+                });
+
+            }
+        });
+    }else{
+        callback(vkAccessToken);
+    }
+
+}
+
+function parseLink(link) {
+    var params = window.location.hash.substring(1).split('&');
+
+    for(var i = 0; i < params.length; i++){
+        var vals = params[i].split("=");
+
+        if(vals[0] == "ref"){
+            link = vals[1];
+            break;
+        }
+
+    }
+
+    return link;
+}
+
 function extractContentId(link){
     var matches = link.match(/(wall|wall_reply|photo|photo_comment|video|video_comment|note|audio|topic_comment)(-?\d+)_(\d+)/);
     return matches[1] + matches[2] + "_" + matches[3];
@@ -55,48 +87,60 @@ function extractContentId(link){
 
 function analize(reference){
 
-    $("#reference").val(reference);
+        getToken(function(token) {
 
-    window.location.hash = "ref=" + reference;
+            vkAccessToken = token;
 
-    hideContent();
 
-    var matches = reference.match(/(wall|wall_reply|photo|photo_comment|video|video_comment|note|audio|topic_comment)(-?\d+)_(\d+)/);
+            $("#reference").val(reference);
 
-    getUsersCities(matches[2], matches[3], matches[1], function(data){
+            window.location.hash = "ref=" + reference;
 
-        var cf1 = crossfilter(data.response);
+            hideContent();
 
-        drawCityChart(cf1, "#chart-city");
-        drawGenderChart(cf1, "#chart-gender");
-        drawAgeChart(cf1, "#chart-age");
+            var matches = reference.match(/(wall|wall_reply|photo|photo_comment|video|video_comment|note|audio|topic_comment)(-?\d+)_(\d+)/);
 
-        var ids = extractUserIds(data.response);
+            getUsersCities(matches[2], matches[3], matches[1], function (data) {
 
-        getUsersGroups(ids, function(data) {
+                var cf1 = crossfilter(data.response);
 
-            var cf2 = crossfilter(data);
+                drawCityChart(cf1, "#chart-city");
 
-            var map = {};
-            for(var i = 0; i < data.length; i++){
-                var el = data[i];
-                var fname = getGroupName(el);
-                map[fname] = el;
-            }
+                drawGenderChart(cf1, "#chart-gender");
 
-            drawGroupChart(cf2, "#chart-groups", map);
+                drawAgeChart(cf1, "#chart-age");
 
-            dc.renderAll();
+                var ids = extractUserIds(data.response);
 
-            showContent();
+                getUsersGroups(ids, function (data) {
 
-        }, function(error) {
-            showError(error);
-        });
-    }, function(error) {
-        showError(error);
+                    var cf2 = crossfilter(data);
+
+                    var map = {};
+                    for (var i = 0; i < data.length; i++) {
+                        var el = data[i];
+                        var fname = getGroupName(el);
+                        map[fname] = el;
+                    }
+
+                    drawGroupChart(cf2, "#chart-groups", map);
+
+                    dc.renderAll();
+
+                    showContent();
+
+                }, function (error) {
+                    showError({"statusText": error});
+                });
+            }, function (error) {
+                showError({"statusText": error});
+            });
+
+        }, function(){
+
+            hideContentNoLoading();
+
     });
-
 }
 
 function showError(error){
@@ -123,6 +167,16 @@ function hideContent(){
     $("#go-btn").attr('disabled','disabled');
     $("#go-btn").html("Ждите...");
     $("#reference").attr('disabled','disabled');
+}
+
+
+function hideContentNoLoading(){
+    $("#error").css("display", "none");
+    $("#content").hide();
+    $("#spinner").hide();
+    $("#go-btn").removeAttr('disabled','disabled');
+    $("#go-btn").html("Поехали!");
+    $("#reference").removeAttr('disabled','disabled');
 }
 
 function drawAgeChart(cf, divId){
@@ -283,34 +337,6 @@ function drawGenderChart(cf, divId){
         return NameGender[d.key] + ": " + d.value;
     })
     .group(groupGender);
-}
-
-function getTopGroup(group, top, undefinedName){
-    return {
-       all : function() {
-
-        var g = [];
-        var all = group.all();
-
-        all.sort(function(a, b){
-            return a.value - b.value;
-        });
-
-        for(var i = all.length - 1 - top; i < all.length - 1 && i >= 0; i++){
-            var d = all[i];
-            g.push({key : d.key, value : d.value})
-        }
-
-        var sum = all.length - 1 - top;
-
-        if(sum > 0){
-            g.push({key : undefinedName, value : sum})
-        }
-
-
-        return g;
-       }
-     };
 }
 
 function getUsersCities(owner_id, item_id, content_type, callback, error_callback){

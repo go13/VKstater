@@ -1,5 +1,3 @@
-var vkAccessToken = null;
-
 $(window).ready(function(){
 
     if(window.location.host == "vk.com"){

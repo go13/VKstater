@@ -1,42 +1,61 @@
-chrome.browserAction.onClicked.addListener(function(tab) {
-    login();
-});
+var vkCLientId           = '4346186',
+    vkRequestedScopes    = '',
+    vkAuthenticationUrl  = 'https://oauth.vk.com/authorize?client_id=' + vkCLientId +
+        '&scope=' + vkRequestedScopes +
+        '&redirect_uri=http%3A%2F%2Fvk.com' +
+        '&display=page' +
+        '&response_type=token';
+
+function relogin(){
+
+    chrome.tabs.create({url: vkAuthenticationUrl, selected: false}, function (tab) {
+
+        var tabUpdateListener = function(tabid, changeInfo, tab){
+            if(tabid == tab.id && changeInfo.url !== undefined
+                    && changeInfo.status === "loading" && changeInfo.url.indexOf('api.vk.com/blank.html') > -1){
+
+                localStorage["vkAccessToken"] = getUrlParameterValue(changeInfo.url, 'access_token');
+
+                chrome.tabs.onUpdated.removeListener(tabUpdateListener);
+
+                chrome.tabs.remove(tabid, function() { });
+
+            }
+        };
+
+        chrome.tabs.onUpdated.addListener(tabUpdateListener);
+
+    });
+}
 
 function login(){
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.create({url: vkAuthenticationUrl, selected: true}, function (tab) {
 
-        var vkCLientId           = '4346186',
-            vkRequestedScopes    = '',
-            vkAuthenticationUrl  = 'https://oauth.vk.com/authorize?client_id=' + vkCLientId +
-                '&scope=' + vkRequestedScopes +
-                '&redirect_uri=http%3A%2F%2Fvk.com' +
-                '&display=page' +
-                '&response_type=token';
+        var tabUpdateListener = function(tabid, changeInfo, tab){
+            if(tabid == tab.id && changeInfo.url !== undefined
+                    && changeInfo.status === "loading" && changeInfo.url.indexOf('api.vk.com/blank.html') > -1){
 
-        chrome.tabs.create({url: vkAuthenticationUrl, selected: true}, function (tab) {
+                localStorage["vkAccessToken"] = getUrlParameterValue(changeInfo.url, 'access_token');
 
-            var tabUpdateListener = function(tabid, changeInfo, tab){
-                if(tabid == tab.id && changeInfo.url !== undefined
-                        && changeInfo.status === "loading" && changeInfo.url.indexOf('api.vk.com/blank.html') > -1){
+                chrome.tabs.onUpdated.removeListener(tabUpdateListener);
 
-                    var vkAccessToken = getUrlParameterValue(changeInfo.url, 'access_token');
+                var homeUrl = chrome.extension.getURL("home.html");
 
-                    localStorage["vkAccessToken"] = vkAccessToken;
+                chrome.tabs.update(tabid, {url: homeUrl});
 
-                    chrome.tabs.onUpdated.removeListener(tabUpdateListener);
-
-                    var homeUrl = chrome.extension.getURL("home.html");
-
-                    chrome.tabs.update(tabid, {url: homeUrl});
-
-                }
             }
+        };
 
-            chrome.tabs.onUpdated.addListener(tabUpdateListener);
+        chrome.tabs.onUpdated.addListener(tabUpdateListener);
 
-        });
-   });
+    });
 }
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+
+    login();
+
+});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.method == "getLocalStorage"){
@@ -46,17 +65,15 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
     } else if (request.method == "OPEN_NEW_STAT_WINDOW"){
 
-      var homeUrl = chrome.extension.getURL("home.html") + "#ref=" + request.ref;
+        var homeUrl = chrome.extension.getURL("home.html") + "#ref=" + request.ref;
 
-      chrome.tabs.create({url: homeUrl, selected: true}, function (tab) {
+        chrome.tabs.create({url: homeUrl, selected: true}, function (tab) { });
 
-      });
+        sendResponse({}); // snub them.
 
-      sendResponse({}); // snub them.
+    } if (request.method == "RELOGIN"){
 
-    }if (request.method == "RELOGIN"){
-
-        login();
+        relogin();
 
         sendResponse({}); // snub them.
 
