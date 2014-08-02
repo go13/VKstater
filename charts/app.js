@@ -115,7 +115,9 @@ function analize(reference){
 
             getUsersCities(owner_id, matches[3], matches[1], function (data) {
 
-                var cf1 = crossfilter(data.response);
+                $("#loaded-number").html("Загруженно пользователей - " + data.response.users.length + " из общего количества лайков - "+ data.response.count);
+
+                var cf1 = crossfilter(data.response.users);
 
                 drawCityChart(cf1, "#chart-city");
 
@@ -123,7 +125,7 @@ function analize(reference){
 
                 drawAgeChart(cf1, "#chart-age");
 
-                var ids = extractUserIds(data.response);
+                var ids = extractUserIds(data.response.users);
 
                 getUsersGroups(ids, function (data) {
 
@@ -163,6 +165,7 @@ function showError(error){
     $("#go-btn").html("Поехали!");
     $("#reference").removeAttr('disabled');
     $("#error_msg").html("Описание: " + error.statusText);
+    $("#loaded-number").hide();
 }
 
 function showContent(){
@@ -171,6 +174,7 @@ function showContent(){
     $("#go-btn").removeAttr('disabled');
     $("#go-btn").html("Поехали!");
     $("#reference").removeAttr('disabled');
+    $("#loaded-number").show();
 }
 
 function hideContent(){
@@ -180,6 +184,7 @@ function hideContent(){
     $("#go-btn").attr('disabled','disabled');
     $("#go-btn").html("Ждите...");
     $("#reference").attr('disabled','disabled');
+    $("#loaded-number").hide();
 }
 
 
@@ -190,6 +195,7 @@ function hideContentNoLoading(){
     $("#go-btn").removeAttr('disabled','disabled');
     $("#go-btn").html("Поехали!");
     $("#reference").removeAttr('disabled','disabled');
+    $("#loaded-number").hide();
 }
 
 function drawAgeChart(cf, divId){
@@ -353,7 +359,7 @@ function drawGenderChart(cf, divId){
 }
 
 function getUsersCities(owner_id, item_id, content_type, callback, error_callback){
-    $.post('https://api.vk.com/method/execute.findUserCities?'+
+    $.post('https://api.vk.com/method/execute.findUserCitiesNew?'+
         'access_token=' + vkAccessToken +
         '&owner_id=' + owner_id +
         '&item_id=' + item_id +
